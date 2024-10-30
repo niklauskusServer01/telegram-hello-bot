@@ -1,3 +1,5 @@
+require('dotenv').config(); // Подключаем dotenv в самом начале
+
 const express = require('express');
 const { Telegraf } = require('telegraf');
 
@@ -10,7 +12,7 @@ app.use(bot.webhookCallback('/webhook'));
 // Запуск сервера и установка Webhook
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, async () => {
-  const webhookUrl = `https://vercel.com/niklauskus-projects/telegram-hello-bot-nmyd`; // Замените на свой URL
+  const webhookUrl = `https://vercel.com/niklauskus-projects/telegram-hello-bot-nmyd`; // Замените на реальный URL вашего приложения на Vercel
   try {
     await bot.telegram.setWebhook(webhookUrl);
     console.log(`Webhook установлен на ${webhookUrl}`);
