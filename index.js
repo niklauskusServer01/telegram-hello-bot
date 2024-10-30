@@ -2,23 +2,23 @@ const express = require('express');
 const { Telegraf } = require('telegraf');
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
+const app = express();
 
+// Основной обработчик сообщений
 bot.on('text', (ctx) => {
   ctx.reply('Привет');
 });
 
-bot.launch();
+// Настройка Webhook
+app.use(bot.webhookCallback('/webhook'));
 
-const app = express();
-
-// Порт, на котором сервер будет слушать запросы
+// Укажите Webhook для Vercel
 const PORT = process.env.PORT || 3000;
-
-app.get('/', (req, res) => {
-  res.send('Бот работает!');
-});
-
-// Запуск сервера Express
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Сервер запущен на порту ${PORT}`);
+  
+  // Установка Webhook
+  const webhookUrl = `https://vercel.com/niklauskus-projects/telegram-hello-bot-nmyd`;
+  await bot.telegram.setWebhook(webhookUrl);
+  console.log(`Webhook установлен на ${webhookUrl}`);
 });
