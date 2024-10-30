@@ -12,7 +12,7 @@ app.use(bot.webhookCallback('/webhook'));
 // Запуск сервера и установка Webhook
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, async () => {
-  const webhookUrl = `telegram-hello-bot-nmyd-odh54hszy-niklauskus-projects.vercel.app/webhook`;
+  const webhookUrl = `https://telegram-hello-bot-nmyd-niklauskus-projects.vercel.app/webhook`;
   try {
     await bot.telegram.setWebhook(webhookUrl);
     console.log(`Webhook установлен на ${webhookUrl}`);
